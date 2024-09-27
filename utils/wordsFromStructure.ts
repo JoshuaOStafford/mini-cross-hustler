@@ -36,7 +36,10 @@ function firstDown(structure: string, char: string) {
 }
 
 function firstAcross(structure: string, char: string) {
-    const column = (char.charCodeAt(0) - 96) % 5;
+    let column = (char.charCodeAt(0) - 96) % 5;
+    if (column === 0) { 
+        column = 5;
+    }
     for (let i = 1; i < column; i++) {
         const currentLetter = String.fromCharCode(char.charCodeAt(0) + i - column);
         if (!structure.includes(currentLetter)) {
