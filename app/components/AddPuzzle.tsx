@@ -4,6 +4,7 @@ import DateSelector from "@components/DateSelector";
 import dayjs from "dayjs";
 import PuzzleStructure from "./PuzzleStructure";
 import Instructions from "@components/Instructions";
+import TimeSelector from "@components/TimeSelector";
 
 
 export enum Step {
@@ -40,7 +41,7 @@ const AddPuzzle = () => {
         <Instructions currentStep={currentStep} />
 
         {(currentStep === Step.Structure || currentStep === Step.WordInfo) && <PuzzleStructure structure={structure} setStructure={setStructure} />}
-        
+        {currentStep === Step.Time && <TimeSelector time={time} setTime={setTime} />}
         
         <div className="flex space-x-2">
             {currentStep > Step.Structure && <button onClick={() => setCurrentStep(currentStep - 1)}>Back</button>}
