@@ -5,7 +5,6 @@ import dayjs from "dayjs";
 import PuzzleStructure from "./PuzzleStructure";
 
 enum Step {
-    Date,
     Structure,
     Order,
     Time,
@@ -18,7 +17,7 @@ const AddPuzzle = () => {
     const [structure, setStructure] = useState("");
     const [words, setWords] = useState<string[]>([]);
     const [order, setOrder] = useState<string[]>([]);
-    const [currentStep, setCurrentStep] = useState<Step>(Step.Date);
+    const [currentStep, setCurrentStep] = useState<Step>(Step.Structure);
 
     return (
         <div>
