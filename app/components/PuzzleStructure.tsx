@@ -15,16 +15,9 @@ const PuzzleStructure = ({ structure, setStructure }: PuzzleStructureProps) => {
      */
     const handleBoxClick = (char: string) => {
 
-        // if box is already selected, remove it
-        if (!structure.includes(char)) {
-            console.log("box was selected");
-            console.log(char);
-            setStructure(structure + char);
-        } else {
-            console.log("box was not selected")
-            setStructure(structure.replace(char, ''));
-        }
-        console.log("test: " + structure); // for debugging
+        // if box is already selected, remove it from structure
+        let newStructure = !structure.includes(char) ? [...structure, char].sort().join('') : structure.replace(char, '').split('').sort().join('');
+        setStructure(newStructure);
     }
 
     return (
