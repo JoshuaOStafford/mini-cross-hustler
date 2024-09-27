@@ -8,11 +8,11 @@ import Instructions from "@components/Instructions";
 
 export enum Step {
     Structure,
-    WordInfo,
     Time,
     Submitting,
     Submitted,
-    Error
+    Error,
+    WordInfo
 }
 
 export interface Word {
@@ -34,9 +34,19 @@ const AddPuzzle = () => {
     return (
         <div>
         <h1>Add Puzzle for {date ? dayjs(date).format("MMMM D, YYYY") : ""}</h1>
+
         <DateSelector date={date} setDate={setDate} />
+
         <Instructions currentStep={currentStep} />
-        <PuzzleStructure structure={structure} setStructure={setStructure} />
+
+        {(currentStep === Step.Structure || currentStep === Step.WordInfo) && <PuzzleStructure structure={structure} setStructure={setStructure} />}
+        
+        
+        <div className="flex space-x-2">
+            {currentStep > Step.Structure && <button onClick={() => setCurrentStep(currentStep - 1)}>Back</button>}
+            {currentStep < Step.Submitted && <button onClick={() => setCurrentStep(currentStep + 1)}>Next</button>}
+        </div>
+        
         </div>
     );
 };
