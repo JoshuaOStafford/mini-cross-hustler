@@ -23,7 +23,6 @@ const PuzzleStructure = ({ structure, setStructure }: PuzzleStructureProps) => {
 
     return (
         <div>
-            <h1>Puzzle Structure</h1>
             <div className="border-black border-2 box-border w-1/2">
             <div className="grid grid-cols-5">
                 {indexes.map((char, index) => (
