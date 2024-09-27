@@ -9,6 +9,9 @@ const Instructions = ({ currentStep }: InstructionProps) => {
   let prompt = "";
   let details = ""
   switch (currentStep) {
+    case Step.Date:
+      prompt = "Hit next once you've selected the puzzles date";
+      break;
     case Step.Structure:
       prompt = "Input Mini Cross Structure";
       details = "Click boxes to toggle between white and black. Match the pattern of the crossword you want to insert";
