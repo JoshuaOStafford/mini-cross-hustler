@@ -23,7 +23,7 @@ const PuzzleStructure = ({ structure, setStructure, words, currentWord, step }: 
             return; // do nothing is click made outside structure setting step
         }
         // if box is already selected, remove it from structure
-        let newStructure = !structure.includes(char) ? [...structure, char].sort().join('') : structure.replace(char, '').split('').sort().join('');
+        const newStructure = !structure.includes(char) ? [...structure, char].sort().join('') : structure.replace(char, '').split('').sort().join('');
         setStructure(newStructure);
     }
 
