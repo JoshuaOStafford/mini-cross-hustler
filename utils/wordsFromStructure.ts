@@ -1,7 +1,12 @@
+type Word = {
+    name: string;
+    length: number;
+    characters: string;
+    known: "yes" | "with_clue" | "no" | "unknown";
+}
 
-
-function wordsFromTheStructure(structure: string) {
-    let words = <string[]>[];
+export default function wordsFromTheStructure(structure: string) {
+    let words = <Word[]>[];
     let potentialDup = false;
     let numberOfDupes = 0;
     for (let index = 1; index <= 25 && words.length < 10; index++) {
@@ -13,18 +18,36 @@ function wordsFromTheStructure(structure: string) {
             const num = words.length + 1 - numberOfDupes; 
             if (firstDown(structure, char)) {
                 potentialDup = true;
-                words.push(num + 'd');
+                const name = num + 'd';
+                words.push(createWordDown(name, char, structure));
             }
             if (firstAcross(structure, char)) {
                 if (potentialDup) { // was a duplicate
                     numberOfDupes++;
                 }
-                words.push(num + 'a');
+                const name = num + 'a';
+                words.push(createWordAcross(name, char, structure));
             }
         }
     }
-    return words;
+    let orderedWords = reorder(words);
+    return orderedWords;
 };
+
+function reorder(words: Word[]) {
+    let orderedWords = <Word[]>[];
+    for (let i = 0; i < words.length; i++) {
+        if (words[i].name.includes('a')) {
+            orderedWords.push(words[i]);
+        }
+    }
+    for (let i = 0; i < words.length; i++) {
+        if (words[i].name.includes('d')) {
+            orderedWords.push(words[i]);
+        }
+    }
+    return orderedWords;
+}
 
 function firstDown(structure: string, char: string) {
     if (char <= 'e'){ // on first row
@@ -49,4 +72,38 @@ function firstAcross(structure: string, char: string) {
     return true;
 }
 
-module.exports = wordsFromTheStructure;
+function createWordDown(name: string, char: string, structure: string): Word  {
+    let i = char.charCodeAt(0) - 96;
+    let letters = 0;
+    let characters = '';
+    while (i <= 5*5){
+        const currentLetter = String.fromCharCode(i+96);
+        if (!structure.includes(currentLetter)) {
+            letters++;
+            characters += currentLetter;
+        }
+        i += 5;
+    }
+    return {name, length: letters, characters, known: "unknown"};
+}
+
+function createWordAcross(name: string, char: string, structure: string): Word {
+    let i = char.charCodeAt(0) - 96;
+    let row = i % 5;
+    if (row === 0) { 
+        row = 5;
+    }
+    let letters = 0;
+    let characters = '';
+    while (row <= 5){
+        const currentLetter = String.fromCharCode(i+96);
+        if (!structure.includes(currentLetter)) {
+            letters++;
+            characters += currentLetter;
+        }
+        i++;
+        row++;
+    }
+    return {name, length: letters, characters, known: "unknown"};
+}
+

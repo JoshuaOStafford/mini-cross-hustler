@@ -40,8 +40,8 @@ const Instructions = ({ currentStep }: InstructionProps) => {
   
     return (
     <div>
-        <h2 className="text-2xl font-bold">{prompt}</h2>
-        <p className="text-sm">{details}</p>
+        <h2 className="text-2xl font-bold text-center mb-4">{prompt}</h2>
+        <p className="text-sm text-center text-gray-600">{details}</p>
     </div>
   );
 };
