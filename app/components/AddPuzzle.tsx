@@ -24,7 +24,7 @@ export interface Word {
     name: string;
     length: number;
     characters: string;
-    known: "yes" | "with_clue" | "no" | "unknown";
+    known: "yes" | "with_letters" | "no" | "unknown";
 }
 
 const AddPuzzle = () => {
@@ -43,9 +43,9 @@ const AddPuzzle = () => {
         }
         console.log(date, time, structure, words);
         try {
-            const response = await axios.post("http://localhost:4000/puzzle", {
+            const response = await axios.post("http://localhost:3000/api/puzzle", {
                 date,
-                time,
+                solveTime: time,
                 structure,
                 words
             });

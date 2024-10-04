@@ -9,7 +9,7 @@ type WordInfoProps = {
 
 const WordInfoInserter = ({words, setWords, currentWord, setCurrentWord}: WordInfoProps) => {
 
-    const handleKnown = (known: "yes" | "with_clue" | "no" | "unknown") => {
+    const handleKnown = (known: "yes" | "with_letters" | "no" | "unknown") => {
         const newWords = [...words];
         newWords[currentWord].known = known;
         setWords(newWords);
@@ -31,9 +31,9 @@ const WordInfoInserter = ({words, setWords, currentWord, setCurrentWord}: WordIn
                     </button>
                 )
             })}
-            <button className={`${words[currentWord]?.known === 'yes' ? 'bg-red-300' : 'bg-gray-300'} px-4 py-2 rounded-md hover:bg-red-300`} onClick={() => handleKnown('yes')}>Knew Immediately</button>
-            <button className={`${words[currentWord]?.known === 'with_clue' ? 'bg-red-300' : 'bg-gray-300'} px-4 py-2 rounded-md hover:bg-red-300`} onClick={() => handleKnown('with_clue')}>Knew with Letters</button>
-            <button className={`${words[currentWord]?.known === 'no' ? 'bg-red-300' : 'bg-gray-300'} px-4 py-2 rounded-md hover:bg-red-300`} onClick={() => handleKnown('no')}>Never Knew</button>
+            <button className={`${words[currentWord]?.known === 'yes' ? 'bg-green-500' : 'bg-gray-300'} px-4 py-2 rounded-md hover:bg-green-300`} onClick={() => handleKnown('yes')}>Knew Immediately</button>
+            <button className={`${words[currentWord]?.known === 'with_letters' ? 'bg-yellow-500' : 'bg-gray-300'} px-4 py-2 rounded-md hover:bg-yellow-300`} onClick={() => handleKnown('with_letters')}>Knew with Letters</button>
+            <button className={`${words[currentWord]?.known === 'no' ? 'bg-red-500' : 'bg-gray-300'} px-4 py-2 rounded-md hover:bg-red-300`} onClick={() => handleKnown('no')}>Never Knew</button>
             
         </div>
     );

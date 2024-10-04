@@ -2,7 +2,7 @@ type Word = {
     name: string;
     length: number;
     characters: string;
-    known: "yes" | "with_clue" | "no" | "unknown";
+    known: "yes" | "with_letters" | "no" | "unknown";
 }
 
 export default function wordsFromTheStructure(structure: string) {
