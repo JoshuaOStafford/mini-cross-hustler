@@ -29,10 +29,10 @@ export async function POST(request: Request) {
       await client.query('COMMIT');
   
       return new Response(JSON.stringify({ message: "Puzzle created successfully", puzzleId }), { status: 201 });
-    } catch (error: any) {
+    } catch (error: Error | unknown) {
       // Rollback in case of an error
       await client.query('ROLLBACK');
-      return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+      return new Response(JSON.stringify({ error: (error as Error).message || "An error occurred" }), { status: 500 });
     } finally {
       client.release(); // Always release the client back to the pool
     }

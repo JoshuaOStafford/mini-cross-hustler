@@ -1,6 +1,11 @@
 import { createPool, Pool } from '@vercel/postgres';
 
-// Define the pool globally with correct typing
+/* eslint-disable no-var */
+declare global {
+  var _postgresPool: Pool | undefined;
+}
+/* eslint-enable no-var */
+
 let pool: Pool;
 
 if (!global._postgresPool) {
@@ -9,5 +14,6 @@ if (!global._postgresPool) {
   });
 }
 pool = global._postgresPool;
+pool = pool;
 
 export default pool;
